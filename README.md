@@ -2,7 +2,7 @@
 
 This repository is the official implementation of the following paper accepted by the Conference on Uncertainty in Artificial Intelligence (UAI) 2021:
 
-> Quoc Phong Nguyen, Zhaoxuan Wu, Bryan Kian Hsiang Low, Patrick Jaillet
+> Quoc Phong Nguyen*, Zhaoxuan Wu*, Bryan Kian Hsiang Low, Patrick Jaillet
 >
 > Trusted-Maximizers Entropy Search for Efficient Bayesian Optimization
 

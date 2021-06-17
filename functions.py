@@ -6,8 +6,8 @@ import utils
 import pickle
 
 # FOR FACE_ATTACK
-from face_attack.face_attack_fn import fr_br_distance_func
-from face_attack.utils.paths import ATTACK_DIR
+# from face_attack.face_attack_fn import fr_br_distance_func
+# from face_attack.utils.paths import ATTACK_DIR
 import os
 
 # FOR CNN_CIFAR_10
@@ -726,48 +726,51 @@ def negative_stylbinski():
             'maximizer': np.array([0.20964659, 0.20964659]),
             'maximum': 1.0}
 
+##### NOTE #####
+# The code for face_attack is not included in this code repository because the trained MMDA face synthesizer model is not officially released.
+################
 
-def face_attack():
-    from joblib import Parallel, delayed
-    xdim = 8
-    xmin = -0.2
-    xmax = 0.2
+# def face_attack():
+#     from joblib import Parallel, delayed
+#     xdim = 8
+#     xmin = -0.2
+#     xmax = 0.2
 
-    #xs = get_meshgrid(xmin, xmax, 5, xdim)
-    xs = np.random.rand(100000, xdim) * (xmax - xmin) + xmin
+#     #xs = get_meshgrid(xmin, xmax, 5, xdim)
+#     xs = np.random.rand(100000, xdim) * (xmax - xmin) + xmin
 
-    ENCODINGS = os.path.join(ATTACK_DIR, 'fr_gallery41_encodings.npy')
-    LABELS = os.path.join(ATTACK_DIR, 'fr_gallery41_me_encodings.npy')
-    g_img_encodings, g_img_labels = np.load(ENCODINGS), np.load(LABELS)
+#     ENCODINGS = os.path.join(ATTACK_DIR, 'fr_gallery41_encodings.npy')
+#     LABELS = os.path.join(ATTACK_DIR, 'fr_gallery41_me_encodings.npy')
+#     g_img_encodings, g_img_labels = np.load(ENCODINGS), np.load(LABELS)
 
-    def f(x):
-        # GLOBAL_BOUNDS = [(-.15, .2), (-.15, .2), (-.2, .15), (-.2, .15), (-.2, .15), (-.15, .2), (-.15, .2), (-.15, .15)]
-        lower_bounds = [-.15, -.15, -.2, -.2, -.2, -.15, -.15, -.15]
-        ranges = [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.3]
-        x = x.reshape(-1, xdim)
+#     def f(x):
+#         # GLOBAL_BOUNDS = [(-.15, .2), (-.15, .2), (-.2, .15), (-.2, .15), (-.2, .15), (-.15, .2), (-.15, .2), (-.15, .15)]
+#         lower_bounds = [-.15, -.15, -.2, -.2, -.2, -.15, -.15, -.15]
+#         ranges = [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.3]
+#         x = x.reshape(-1, xdim)
 
-        # Linear mapping to desired bounds
-        x = (x + 0.2) / 0.4 * ranges + lower_bounds
+#         # Linear mapping to desired bounds
+#         x = (x + 0.2) / 0.4 * ranges + lower_bounds
 
-        # JOBLIB PARALLEL
-        results = np.array([Parallel(n_jobs=5)(
-            delayed(fr_br_distance_func)(i, g_img_encodings, g_img_labels, debug=True, show_img=False) for i in x)])
-        # results = np.apply_along_axis(fr_br_distance_func, 1, x, g_img_encodings, g_img_labels, debug=True, show_img=False)
+#         # JOBLIB PARALLEL
+#         results = np.array([Parallel(n_jobs=5)(
+#             delayed(fr_br_distance_func)(i, g_img_encodings, g_img_labels, debug=True, show_img=False) for i in x)])
+#         # results = np.apply_along_axis(fr_br_distance_func, 1, x, g_img_encodings, g_img_labels, debug=True, show_img=False)
 
-        return -1 * results
-        # return fr_br_distance_func(x, g_img_encodings, g_img_labels, debug=True, show_img=False)
+#         return -1 * results
+#         # return fr_br_distance_func(x, g_img_encodings, g_img_labels, debug=True, show_img=False)
 
-    return {'function': f,
-            'xdim': xdim,
-            'xmin': xmin,
-            'xmax': xmax,
-            'xs': xs,
-            'noise.variance': 0.0001,
-            'RBF.variance': 1,
-            'RBF.lengthscale': np.array([1, 1, 1, 1, 1, 1, 1, 1]),
-            'maximizer': np.array([0, 0, 0, 0, 0, 0, 0, 0]),
-            'maximum': 0
-            }
+#     return {'function': f,
+#             'xdim': xdim,
+#             'xmin': xmin,
+#             'xmax': xmax,
+#             'xs': xs,
+#             'noise.variance': 0.0001,
+#             'RBF.variance': 1,
+#             'RBF.lengthscale': np.array([1, 1, 1, 1, 1, 1, 1, 1]),
+#             'maximizer': np.array([0, 0, 0, 0, 0, 0, 0, 0]),
+#             'maximum': 0
+#             }
 
 
 def set_global_determinism(seed_value=0, fast_n_close=False):

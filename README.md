@@ -25,12 +25,9 @@ To optimize real-world neural architecture search for CIFAR-10, run
 bash script_batch_cifar.sh
 ```
 
-To optimize real-world optimization problem of synthesizing faces to fool the [python face_recognition library](https://github.com/ageitgey/face_recognition), first download the multimodal discriminant analysis (MMDA) faces synthesizer model from [here](https://drive.google.com/file/d/1eOrXcWcU8YDxefTvJ2Nz2-u74IDbbS6y/view?usp=sharing), put the model under the `./face_attack/models/` directory, then run 
-```bash
-bash script_batch_face.sh
-```
+The code to optimize the real-world optimization problem of synthesizing faces to fool the python face_recognition library is not included.
 
-Configurations in the `.sh` files can be changed to fit different purposes. Some other pre-defined functions can be found in the [functions.py](functions.py) file.
+NOTE: Configurations in the `.sh` files can be changed to fit different purposes. Some other pre-defined functions can be found in the [functions.py](functions.py) file.
 
 
 ## Remarks

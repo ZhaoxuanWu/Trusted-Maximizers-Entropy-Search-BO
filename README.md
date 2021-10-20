@@ -4,7 +4,7 @@ This repository is the official implementation of the following paper accepted b
 
 > Quoc Phong Nguyen*, Zhaoxuan Wu*, Bryan Kian Hsiang Low, Patrick Jaillet
 >
-> Trusted-Maximizers Entropy Search for Efficient Bayesian Optimization
+> [Trusted-Maximizers Entropy Search for Efficient Bayesian Optimization](https://arxiv.org/abs/2107.14465)
 
 ## Requirements
 
